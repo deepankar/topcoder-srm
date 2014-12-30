@@ -116,6 +116,43 @@ vector<string> parseVS()
 	openfile();
 	char *s = NULL;
 	size_t size;
+	while(getline(&s, &size, f) != -1){
+		int slen = strlen(s);
+		if(s[slen - 1] == '\n'){
+			s[slen - 1] = 0;
+			slen--;
+		}
+		if(slen == 0){
+				free(s);
+				s = NULL;
+				continue;
+		}
+		const char *tok = strtok(s,"{}, \t");
+		while(tok){
+         string str(tok);
+         size_t pos;
+         if((pos=str.find('"')) != string::npos){
+            str.erase(pos,1);
+         }
+         if((pos=str.find('"')) != string::npos){
+            str.erase(pos,1);
+         }
+			vec.push_back(str);
+			tok = strtok(NULL,"{}, \t");
+		}
+		free(s);
+		s = NULL;
+		break;
+	}
+	return vec;
+}
+
+vector<string> parseVS_NL()
+{
+	vector<string> vec;
+	openfile();
+	char *s = NULL;
+	size_t size;
 	bool start = false;
 	while(getline(&s, &size, f) != -1){
 		int slen = strlen(s);
