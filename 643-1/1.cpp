@@ -1,3 +1,4 @@
+//passed
 #include <limits.h>
 #include <stdio.h>
 #include <iostream>
@@ -33,15 +34,20 @@ class Class_Name
          Prime(long long int p, int pwr) : prime(p), power(pwr) {}
    };
 
-   vector<Prime> factorize(long long n)
+/* we know that there are at max maxf factors */
+   vector<Prime> factorize(long long n, int maxf)
    {
       long long r = n;
       vector<Prime> res;
       long long sqrtn = sqrtl(n);
       for(long long int p = 2; p <= sqrtn; p++){
+         if(maxf == 1){ //r must be prime
+            break;
+         }
          int c = 0;
          while ( r % p == 0){
             c++;
+            maxf--;
             r = r / p;
          }
          if(c){
@@ -62,7 +68,7 @@ class Class_Name
       FOR0(i, p.size()){
          N = N/p[i];
       }
-      vector<Prime> rp = factorize(N);
+      vector<Prime> rp = factorize(N, p.size());
       FOR0(i, rp.size()){
          FOR0(j, rp[i].power){
             p.push_back(rp[i].prime);
