@@ -60,7 +60,11 @@ VI parseVI()
 			s[slen - 1] = 0;
 			slen--;
 		}
-		if(slen == 0){
+      for(int i = slen-1; i>=0 && ((!isprint(s[i])) || isspace(s[i])); i--){
+         s[i]=0;
+         slen--;
+      }
+		if(slen == 0 || s[0] == '#'){
 			free(s);
 			s = NULL;
 			continue;
