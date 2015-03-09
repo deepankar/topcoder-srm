@@ -12,6 +12,7 @@
 #include <string>
 using namespace std;
 typedef vector<int> VI;
+//typedef vector<VI> VVI;
 typedef vector<bool> VB;
 typedef vector<string> VS;
 typedef long long int lint;
