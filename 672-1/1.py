@@ -1,3 +1,4 @@
+#passed system test
 import sys
 import bisect
 def get_factors(n):
